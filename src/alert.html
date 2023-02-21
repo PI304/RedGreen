@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Sensor Alert</title>
+</head>
+<body>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card" style="width: 25rem;">
+            <div class="card-body">
+                <h5 class="card-title">Alert</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Sensor Status</h6>
+                <p class="card-text">Send the status of the sensor by clicking the buttons below</p>
+                <p id="status" class="card-text">Current Status: CLEARED</p>
+                <button id="cleared" type="button" class="btn btn-success">Cleared</button>
+                <button id="danger" type="button" class="btn btn-danger">Danger</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script type="text/javascript">
+        const cleared = document.getElementById('cleared');
+        const danger = document.getElementById('danger');
+        const status = document.getElementById('status');
+        const socket = io.connect('http://localhost:3000');
+
+        socket.on('connect', async function(s) {
+            console.log('socket connected');
+            await socket.emit('join', 'demo-room');
+        })
+
+        cleared.addEventListener('click', () => {
+            console.log("clicked cleared");
+            status.innerText = 'Current Status: CLEARED';
+            socket.emit("message", "CLEARED")
+        })
+
+        danger.addEventListener('click', () => {
+                console.log("clicked danger");
+                status.innerText = 'Current Status: DANGER';
+                socket.emit("message", "DANGER")
+            })   
+    </script>
+</body>
+</html>

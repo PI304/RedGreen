@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sensor Status</title>
+    <style type="text/css">
+      body {
+        height: 100%;
+        width: 100%;
+        background-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script type="text/javascript">
+        const body = document.body;
+
+        const socket = io.connect('http://localhost:3000');
+
+        socket.on('connect', async function(s) {
+            console.log('socket connected');
+            await socket.emit('join', 'demo-room');
+        })
+
+        socket.on('status', (msg) => {
+          console.log('request received ' + msg)
+          if (msg === 'CLEARED') {
+            body.style.backgroundColor = 'green';
+          } else {
+            body.style.backgroundColor = 'red';
+          }
+        })
+    </script>
+  </body>
+</html>
