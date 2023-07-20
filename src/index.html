@@ -6,7 +6,7 @@
       body {
         height: 100%;
         width: 100%;
-        background-color: green;
+        background-color: green; /* change base color if needed */
       }
     </style>
   </head>
@@ -25,9 +25,9 @@
         socket.on('status', (msg) => {
           console.log('request received ' + msg)
           if (msg === 'CLEARED') {
-            body.style.backgroundColor = 'green';
+            body.style.backgroundColor = 'green'; // change base color if needed
           } else {
-            body.style.backgroundColor = 'red';
+            body.style.backgroundColor = 'red'; // change alert color if needed
           }
         })
     </script>

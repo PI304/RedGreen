@@ -18,10 +18,11 @@ app.get('/status', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-    console.log('a user connected');
+    console.log('user connected');
 
     socket.on('join', (room) => {
-      socket.join(room);
+        console.log('user joined');
+        socket.join(room);
     })
 
     socket.on('disconnect', () => {
@@ -31,7 +32,7 @@ io.on('connection', (socket) => {
     socket.on('message', (msg) => {
         console.log('message: ' + msg);
 
-        socket.to('demo-room').emit('status', msg);
+        socket.to('demo-room').emit('status', msg); // change room name if needed
       });
 });
 
