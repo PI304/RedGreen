@@ -1,7 +1,7 @@
 # Red-Green Websocket API
 
 1. [소스코드](#소스코드)
-2. [Postman 을 이용한 서버 테스팅](#Postman 을 이용한 서버 테스팅)
+2. [Postman 을 이용한 서버 테스팅](#Postman-을-이용한-서버-테스팅)
 
 ## 소스코드
 ___
